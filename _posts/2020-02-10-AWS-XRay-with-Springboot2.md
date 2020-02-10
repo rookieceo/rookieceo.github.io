@@ -1,5 +1,10 @@
-AWS X-Ray 적용하기(using AOP)
+---
+title: "AWS X-Ray 적용하기(using AOP)"
+date: 2020-02-10 18:28:00 +0900
+categories: aws x-ray springboot
+---
 
+AWS X-Ray 적용하기(using AOP)
 
 Spring Boot Application에 AWS X-Ray를 적용해 보았다.
 아쉽지만 sql 트레이싱의 경우에는 아직 HikariCP 로는 적용할 수 있는 방법이 없어 라이브러리만 추가해두었다. 
