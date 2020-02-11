@@ -210,7 +210,7 @@ public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSucc
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 		throws IOException, ServletException {
 
-		CustomUser roseUser = (CustomUser) authentication.getPrincipal();
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 
 		response.setStatus(HttpStatus.OK.value());
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
@@ -219,10 +219,10 @@ public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSucc
 
 		resultMap.put("isLogin", true);
 		resultMap.put("userMessage", "환영합니다.");
-		resultMap.put("userRole", roseUser.getUserRole());
+		resultMap.put("userRole", customUser.getUserRole());
 		// Xray User 추가
 		AWSXRay.getCurrentSegmentOptional()
-		.ifPresent(e -> e.setUser(roseUser.getUserId()));
+		.ifPresent(e -> e.setUser(customUser.getUserId()));
 
 		this.mapper.writeValue(response.getWriter(), resultMap);
 	}
