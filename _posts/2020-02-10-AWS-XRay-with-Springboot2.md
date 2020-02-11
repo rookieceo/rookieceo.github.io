@@ -1,20 +1,20 @@
 ---
-title: "AWS X-Ray 적용하기(using AOP)"
+title: AWS X-Ray 적용하기(using Spring AOP)
 date: 2020-02-10 18:28:00 +0900
 categories: aws x-ray xray springboot
 ---
 
-AWS X-Ray 적용하기(using AOP)
+### AWS X-Ray 적용하기(using Spring AOP)
 
-Spring Boot Application에 AWS X-Ray를 적용해 보았다.  
-아쉽지만 sql 트레이싱의 경우에는 아직 HikariCP 로는 적용할 수 있는 방법이 없어 라이브러리만 추가해두었다.  
-X-Ray 버전이 업그레이드 되면 boot 2.x의 기본 DataSource인 Hikari도 지원되면 좋겠다. 
+Spring Boot Application에 AWS X-Ray를 적용해 보았다. 
+아쉽지만 sql 트레이싱의 경우에는 아직 HikariCP 로는 적용할 수 있는 방법이 없어 라이브러리만 추가해두었다. X-Ray 버전이 업그레이드 되면 boot 2.x의 기본 DataSource인 Hikari도 지원되면 좋겠다. 
+
 현재 적용한 내역은 아래와 같다. 
 
-1. Front / Backend API가 분리되어 있으므로 /api/* 로 시작되는 영역만을 트레이싱한다.  
-2. 필요없는 특정 API는 수집하지 않는다.  
-3. X-Ray User 개념을 도입하여 사용자 ID를 기록한다. (로그인 한 유저의 호출 API 추적)  
-4. 추후 문제 추적을 위해 X-Ray Trace ID를 어플리케이션 로그 파일에 함께 넣어준다.  
+> 1. Front / Backend API가 분리되어 있으므로 /api/* 로 시작되는 영역만을 트레이싱한다.  
+> 2. 필요없는 특정 API는 수집하지 않는다. 
+> 3. X-Ray User 개념을 도입하여 사용자 ID를 기록한다. (로그인 한 유저의 호출 API 추적) 
+> 4. 추후 문제 추적을 위해 X-Ray Trace ID를 어플리케이션 로그 파일에 함께 넣어준다.  
 
 - 참고 자료 
   - 개념 : https://docs.aws.amazon.com/ko_kr/xray/latest/devguide/aws-xray.html
@@ -37,8 +37,7 @@ X-Ray 버전이 업그레이드 되면 boot 2.x의 기본 DataSource인 Hikari�
   - S3 연동(AWS SDK For Java v2)
   - Application 로그(Logback)에 트레이스 ID 주입
 
-
-1. 라이브러리 추가(maven : pom.xml)
+#### 1. 라이브러리 추가(maven : pom.xml)
 
 ```xml
 ...
@@ -89,7 +88,7 @@ X-Ray 버전이 업그레이드 되면 boot 2.x의 기본 DataSource인 Hikari�
 ...
 ```
 
-2. AWSXRayServletFilter 추가(AWSXRayTracingFilterConfig)
+#### 2. AWSXRayServletFilter 추가(AWSXRayTracingFilterConfig)
 
 ```java
 @Profile("prd")
@@ -132,7 +131,7 @@ public class AWSXRayTracingFilterConfig {
 }
 ```
 
-3. 샘플링 규칙 항목 추가(src/main/resources/xray-custom-sampling-rules.json)
+#### 3. 샘플링 규칙 항목 추가(src/main/resources/xray-custom-sampling-rules.json)
 
 ```json
 {
@@ -191,7 +190,7 @@ public class AWSXRayTracingFilterConfig {
 }
 ```
 
-4. Spring Security SuccessHandler에 User 정보 추가
+#### 4. Spring Security SuccessHandler에 User 정보 추가
 
 ```java
 @Component
@@ -229,7 +228,7 @@ public class AjaxAwareAuthenticationSuccessHandler implements AuthenticationSucc
 }
 ```
 
-5. X-Ray 활성화(AbstractXRayInterceptor 상속) - AOP Pointcut 지정
+#### 5. X-Ray 활성화(AbstractXRayInterceptor 상속) - AOP Pointcut 지정
 
 ```java
 @Profile("prd")
@@ -260,7 +259,7 @@ public class XRayInspector extends AbstractXRayInterceptor {
 
 ```
 
-6. S3 연동(AWS SDK For Java v2)
+#### 6. S3 연동(AWS SDK For Java v2)
 
 ```java
 @Slf4j
@@ -285,7 +284,7 @@ public class S3FileService implements FileService {
 }
 ```
 
-7. Application 로그(Logback)에 트레이스 ID 주입 - 운영계 properties
+#### 7. Application 로그(Logback)에 AWS-TRACE-ID 주입 - 운영계 properties 파일
 
 ```properties
 logging.file.path=/var/log/appLog
