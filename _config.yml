@@ -109,8 +109,8 @@ analytics:
 # Site Author
 author:
   name             : "장인기"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
+  avatar           : "/assets/images/bio-photo.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "요즘(?) 개발자가 되고 싶은 청년" # "I am an **amazing** person."
   location         : "Somewhere"
   email            : 
   links:
