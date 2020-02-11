@@ -1,7 +1,7 @@
 ---
 title: "AWS X-Ray 적용하기(using AOP)"
 date: 2020-02-10 18:28:00 +0900
-categories: aws x-ray springboot
+categories: aws x-ray xray springboot
 ---
 
 AWS X-Ray 적용하기(using AOP)
