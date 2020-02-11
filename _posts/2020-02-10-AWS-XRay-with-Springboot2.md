@@ -15,7 +15,6 @@ X-Ray 버전이 업그레이드 되면 boot 2.x의 기본 DataSource인 Hikari�
 2. 필요없는 특정 API는 수집하지 않는다.  
 3. X-Ray User 개념을 도입하여 사용자 ID를 기록한다. (로그인 한 유저의 호출 API 추적)  
 4. 추후 문제 추적을 위해 X-Ray Trace ID를 어플리케이션 로그 파일에 함께 넣어준다.  
-  
 
 - 참고 자료 
   - 개념 : https://docs.aws.amazon.com/ko_kr/xray/latest/devguide/aws-xray.html
@@ -30,7 +29,6 @@ X-Ray 버전이 업그레이드 되면 boot 2.x의 기본 DataSource인 Hikari�
   - S3(AWS SDK For Java v2)
 
 - 요약
-
   - XRay 관련 라이브러리 추가
   - AWSXRayServletFilter 추가
   - 샘플링 규칙 추가(xray-custom-sampling-rules.json)
@@ -39,7 +37,6 @@ X-Ray 버전이 업그레이드 되면 boot 2.x의 기본 DataSource인 Hikari�
   - S3 연동(AWS SDK For Java v2)
   - Application 로그(Logback)에 트레이스 ID 주입
 
-  
 
 1. 라이브러리 추가(maven : pom.xml)
 
