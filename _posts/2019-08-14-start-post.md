@@ -1,7 +1,8 @@
 ---
-title: "github.io 만들다!"
-date: 2019-08-14 18:26:00 +0900
+title: github.io 만들다!
+date: '2019-08-14 18:26:00 +0900'
 categories: blog start
+published: false
 ---
 시작이 반이다 
 
