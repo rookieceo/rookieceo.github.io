@@ -159,9 +159,48 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
 ```
 
 #### 테스트준비 - ControllerTest 코드(AControllerTest)
-```java 
+```java
+@SpringBootTest
+class AControllerTest {
+
+	private MockMvc mockMvc;
+
+	@Autowired
+	private WebApplicationContext ctx;
+
+	@BeforeEach
+	void setUp() throws Exception {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.ctx)
+			.apply(springSecurity())
+			.build();
+	}
+
+	@Test
+	final void testT1API() throws Exception {
+		this.mockMvc.perform(get("/api/type1/1"))
+			.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	@WithMockUser("user2")
+	final void testT2API() throws Exception {
+		this.mockMvc.perform(get("/api/type2/2"))
+			.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+	@Test
+	@WithMockUser("user3")
+	final void testT3API() throws Exception {
+		this.mockMvc.perform(get("/api/type3/3"))
+			.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+
+}
+```
+
+전체소스는 [여기](https://github.com
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2MDc3NTczOCwtMjA1MjcyNjAzMSw0MT
+eyJoaXN0b3J5IjpbLTYyNjA1NzEzMCwtMjA1MjcyNjAzMSw0MT
 I3MTU1NzcsMTE4NTMzMTE5NywtMTU1NzU0NzIzMSwxMDkyODA1
 NzM0LC02MjM3Njk3NTgsLTEwMTA2MTk5NzAsLTE4MDY1NTE5Mz
 IsLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOTM4MDUxNjk2XX0=
