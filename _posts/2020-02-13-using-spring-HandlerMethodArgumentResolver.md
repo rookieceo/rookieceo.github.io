@@ -36,7 +36,7 @@ public @interface Authorised {
 public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver {
 
 	@Autowired
-	private AService service;
+	private AService aService;
 
 	@Override
 	public boolean supportsParameter(MethodParameter methodParameter) {
@@ -89,7 +89,8 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 	private boolean checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
 		boolean result = false;
 		// DTO의 값과 로그인 유저의 권한을 체크
-		return dto.getUserIndex() == user.getUserIndex();
+		// 예 : result = dto.getUserIndex() == user.getUserIndex();
+		return result
 	}
 
 }
@@ -99,6 +100,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzEwMzQ0MzcsLTE5MzgwNTE2OTZdfQ
-==
+eyJoaXN0b3J5IjpbMTI5OTA2MTg1NSwtMTkzODA1MTY5Nl19
 -->
