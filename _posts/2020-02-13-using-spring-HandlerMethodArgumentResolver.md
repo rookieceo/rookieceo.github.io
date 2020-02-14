@@ -14,6 +14,7 @@ Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비�
 맘에 좀 안 든다.
 그래서 RestController에서 전달 받은 PathVariable 값을 기준으로 'A'서비스 호출 권한 체크를 하고 이를 비지니스 로직에 넣어주는 것으로 해보려고 한다.
 '가' API인 경우에 bDTO를 RestController의 인자 타입으로 변경하여 전달할 것이다.
+인자 타입이 없을 경우에는 
 
 요약하면 아래와 같다.
 1. Custom Annotation(@Authorised) 선언
@@ -80,11 +81,8 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 	}
 
 	private boolean checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
-		boolean result = false;
 		// DTO의 값과 로그인 유저의 권한을 체크
-		// 예 :
-		result = dto.getUserIndex() == user.getUserIndex();
-		return result;
+		return dto.getUserIndex() == user.getUserIndex();
 	}
 }
 
@@ -108,7 +106,7 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA5MjgwNTczNCwtNjIzNzY5NzU4LC0xMD
-EwNjE5OTcwLC0xODA2NTUxOTMyLC00ODQxNzQ5MjksLTE5NDQ1
-NDA5OSwtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbLTExNDI4NDk4ODIsMTA5MjgwNTczNCwtNj
+IzNzY5NzU4LC0xMDEwNjE5OTcwLC0xODA2NTUxOTMyLC00ODQx
+NzQ5MjksLTE5NDQ1NDA5OSwtMTkzODA1MTY5Nl19
 -->
