@@ -4,7 +4,7 @@ published: false
 ## HandlerMethodArgumentResolver 활용해 파라미터 변경 해보기
 
 
-잘 사용하던 Controller의 권한 체크에 관련된 이슈가 생겼다.
+어느날, 잘 사용하던 Rest Controller의 권한 체크에 이슈가 생겼다.
 
 Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스)를 통해 현재 접근 가능한 API인지 체크해야했다.
 
@@ -21,5 +21,5 @@ Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조�
 맘에 좀 안들어 차라리 RestController에서 전달 받은 인자로 권한 체크를 하고 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU5NjI0MTQ1MF19
+eyJoaXN0b3J5IjpbLTcwMzUwODQ2NF19
 -->
