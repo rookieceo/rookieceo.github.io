@@ -13,6 +13,7 @@ Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조�
 때문에 '가' API 같은 경우에는 같은 서비스를 2번이나 호출된다.
 맘에 좀 안 든다.
 차라리 RestController에서 전달 받은 인자로 권한 체크를 하고 이를 비지니스 로직에 넣어주는 것으로 해보려고 한다.
+이
 
 요약하면 아래와 같다.
 
@@ -58,10 +59,9 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		}
 		// 2. Get Login Spring Security User Object 
 		LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
-		// 4. Compare Authorised Work
-		// 3. Current BDTO Workable State
+		// 3. Compare 권한비교 로직
 		boolean isAuthorized = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
-			
+
 		if (isAuthorized) {
 			if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
 				return bDTO;
@@ -85,10 +85,10 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 }
 ```
-#### CustomMVCConfig에 ArgumentResolver 추가
+#### CustomMVCConfig(ArgumentResolver 추가)
 ```java 
 @Configuration
-public class CustomConfig implements WebMvcConfigurer {
+public class CustomMVCConfig implements WebMvcConfigurer {
 	@Autowired
 	private AuthorisedArgumentResolver authorisedArgumentResolver;
 
@@ -104,5 +104,5 @@ public class CustomConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjE0NTQyMjc5LC0xOTM4MDUxNjk2XX0=
+eyJoaXN0b3J5IjpbMTIxODgxMzM0MiwtMTkzODA1MTY5Nl19
 -->
