@@ -97,7 +97,7 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		return pathVariableMap.get(annValue);
 	}
 
-	private EnumWorkableState checkIfIsCurrentlyAuthorisedWorkByWorkIndex(DiagnosisDTO dto, RoseUser user) throws Exception {
+	private EnumWorkableState checkIfIsCurrentlyAuthorised(DiagnosisDTO dto, RoseUser user) throws Exception {
 		EnumWorkableState result;
 
 		log.info("dto.getWorkerUserIndex() : {}", dto.getWorkerUserIndex());
@@ -129,5 +129,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUwMDg2NzQ4NV19
+eyJoaXN0b3J5IjpbMzI5ODE5MDE2XX0=
 -->
