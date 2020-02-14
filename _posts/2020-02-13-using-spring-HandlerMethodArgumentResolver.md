@@ -85,10 +85,15 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 }
 ```
+#### CustomConfig
+```java 
+
+```
 
 #### Controller에서 사용
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzY4ODg0MjA3LC0xOTM4MDUxNjk2XX0=
+eyJoaXN0b3J5IjpbLTIwMjg5NTU0ODQsLTE5MzgwNTE2OTZdfQ
+==
 -->
