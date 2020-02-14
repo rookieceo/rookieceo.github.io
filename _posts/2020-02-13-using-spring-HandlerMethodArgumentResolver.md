@@ -36,7 +36,7 @@ public @interface Authorised {
 public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver {
 
 	@Autowired
-	private DiagnosisTableService service;
+	private AService service;
 
 	@Override
 	public boolean supportsParameter(MethodParameter methodParameter) {
@@ -130,5 +130,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY2OTIxMjkxN119
+eyJoaXN0b3J5IjpbLTU2MTcxMjE1OV19
 -->
