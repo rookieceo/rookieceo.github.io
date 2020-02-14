@@ -14,8 +14,14 @@ Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조�
 맘에 좀 안 든다.
 차라리 RestController에서 전달 받은 인자로 권한 체크를 하고 이를 비지니스 로직에 넣어주는 것으로 해보려고 한다.
 
+요약하면 아래와 같다.
+
+#### 어노테이션(@Authorised) 선언
+#### Custom HandlerMethodArgumentResolver 정의
+#### Cont
 ```java 
+
 ```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MTE4ODEyOTFdfQ==
+eyJoaXN0b3J5IjpbOTMxMjEyMTEwXX0=
 -->
