@@ -18,10 +18,10 @@ Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비�
 요약하면 아래와 같다.
 1. spring-security 설정
 2. Custom Annotation(@Authorised) 선언
-3. Custom HandlerMethodArgumentResolver 정의(AuthorisedArgumentResolver)
-4. Spring WebMVC에 Custom HandlerMethodArgumentResolver추가
-5. RestController에서 사용
-6. 테스트하기
+3. Custom HandlerMethodArgumentResolver 정의(AuthorisedArgumentResolver.java)
+4. Custom HandlerMethodArgumentResolver추가(CustomMVCConfig.java)
+5. RestController에서 사용(AController.java)
+6. 테스트 결과 확인(AControllerTest.java)
 
 #### Custom Annotation(@Authorised) 선언
 ```java 
@@ -141,8 +141,9 @@ public class AController {
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNTI3MjYwMzEsNDEyNzE1NTc3LDExOD
-UzMzExOTcsLTE1NTc1NDcyMzEsMTA5MjgwNTczNCwtNjIzNzY5
-NzU4LC0xMDEwNjE5OTcwLC0xODA2NTUxOTMyLC00ODQxNzQ5Mj
-ksLTE5NDQ1NDA5OSwtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbMTYwNTE2MDQzLC0yMDUyNzI2MDMxLDQxMj
+cxNTU3NywxMTg1MzMxMTk3LC0xNTU3NTQ3MjMxLDEwOTI4MDU3
+MzQsLTYyMzc2OTc1OCwtMTAxMDYxOTk3MCwtMTgwNjU1MTkzMi
+wtNDg0MTc0OTI5LC0xOTQ0NTQwOTksLTE5MzgwNTE2OTZdfQ==
+
 -->
