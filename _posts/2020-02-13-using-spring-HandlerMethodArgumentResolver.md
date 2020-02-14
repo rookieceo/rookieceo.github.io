@@ -68,18 +68,7 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 			// 4. Compare Authorised Work
 			// 3. Current BDTO Workable State
-			EnumWorkableState state = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
-			
-			boolean isAuthorized = false;
-			switch (loginUser.getUserRole()) {
-			case Manager:
-				isAuthorized = true;
-				break;
-			default:
-				EnumWorkableState[] workableStateTarget = authorised.compareTo();
-				isAuthorized = Arrays.stream(workableStateTarget).anyMatch(s -> s == state);
-				break;
-			}
+			boolean isAuthorized = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
 			
 			if (isAuthorized) {
 				if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
@@ -110,5 +99,6 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5ODA0NTk2MCwtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbLTExNzEwMzQ0MzcsLTE5MzgwNTE2OTZdfQ
+==
 -->
