@@ -7,7 +7,7 @@ published: false
 Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스)를 호출해 현재 접근 가능한 API인지 체크해야 하고 해당 로직이 여러 API에서 작동해야했다.
 처음에 AOP를 활용하여 비즈니스 로직에 영향을 주지 않는 범위에서 로직을 넣고자 했다.
 커스텀 어노테이션(@Authorised)을 선언하고 이를 포인트 컷으로 지정해 체크하면 되겠다고 생각해서 코드를 넣다가 아쉬운 점을 발견했다.
-어떤 API(편의상 '가' API)의 경우 권한 체크에 사용했던  'A'서비스로 리턴되는 DTO(편의상 bDTO)를 JSON으로 출력한다.
+어떤 API(편의상 '가' API)의 경우 권한 체크에 사용했던  'A'서비스로 리턴되는 DTO(편의상 'A'DTO)를 JSON으로 출력한다.
 때문에 '가' API 같은 경우에는 'A' 서비스를 2번이나 호출하게 된다.
 맘에 좀 안 든다. 
 그래서 RestController에서 전달 받은 PathVariable 값을 기준으로 'A'서비스 호출 권한 체크를 하고 이를 비지니스 로직에 넣어주는 것으로 해보려고 한다.
@@ -114,35 +114,37 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 @RequestMapping("/api")
 public class AController {
 
-	// 일반 PathVariable 활용 로직
+	@Autowired
+	private AService service;
+
+	// Step1 - 일반 PathVariable 활용 로직
 	@GetMapping(value = "/type1/{keyIndex}")
-	public BDTO type1API(@PathVariable("keyIndex") Long keyIndex) {
-		BDTO dto = new BDTO();
-		dto.setKeyIndex(keyIndex);
-		return dto;
+	public ADTO type1API(@PathVariable("keyIndex") Long keyIndex) {
+		return this.service.getADTOByKeyIndex(keyIndex);
 	}
 
-	// AuthorisedArgumentResolver를 활용하여 비교 로직 -1
+	// Step2 - AuthorisedArgumentResolver를 활용하여 비교 로직 -1
 	@GetMapping(value = "/type2/{keyIndex}")
-	public BDTO type2API(@Authorised("keyIndex") Long keyIndex) {
-		BDTO dto = new BDTO();
-		dto.setKeyIndex(keyIndex);
-		return dto;
+	public ADTO type2API(@Authorised("keyIndex") Long keyIndex) {
+		// AuthorisedArgumentResolver에서 호출된 AService.getADTOByKeyIndex이 다시 호출
+		return this.service.getADTOByKeyIndex(keyIndex);
 	}
 
-	// AuthorisedArgumentResolver를 활용하여 비교 로직 -2
+	// Step3 - AuthorisedArgumentResolver를 활용하여 비교 로직 -2
 	@GetMapping(value = "/type3/{keyIndex}")
 	public ADTO type3API(@Authorised("keyIndex") ADTO dto) {
+		// AuthorisedArgumentResolver에서 호출된 AService.getADTOByKeyIndex 1번만 호출
 		return dto;
 	}
 
 }
+
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk0ODEzMjg4LC0yMDUyNzI2MDMxLDQxMj
-cxNTU3NywxMTg1MzMxMTk3LC0xNTU3NTQ3MjMxLDEwOTI4MDU3
-MzQsLTYyMzc2OTc1OCwtMTAxMDYxOTk3MCwtMTgwNjU1MTkzMi
-wtNDg0MTc0OTI5LC0xOTQ0NTQwOTksLTE5MzgwNTE2OTZdfQ==
+eyJoaXN0b3J5IjpbMTgyMDc5Mjg0NiwtMjA1MjcyNjAzMSw0MT
+I3MTU1NzcsMTE4NTMzMTE5NywtMTU1NzU0NzIzMSwxMDkyODA1
+NzM0LC02MjM3Njk3NTgsLTEwMTA2MTk5NzAsLTE4MDY1NTE5Mz
+IsLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOTM4MDUxNjk2XX0=
 
 -->
