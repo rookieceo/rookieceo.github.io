@@ -67,14 +67,15 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 			LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
 
 			// 4. Compare Authorised Work
+			// 3. Current BDTO Workable State
+			EnumWorkableState state = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
+			
 			boolean isAuthorized = false;
 			switch (loginUser.getUserRole()) {
 			case Manager:
 				isAuthorized = true;
 				break;
 			default:
-				// 3. Current BDTO Workable State
-				EnumWorkableState state = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
 				EnumWorkableState[] workableStateTarget = authorised.compareTo();
 				isAuthorized = Arrays.stream(workableStateTarget).anyMatch(s -> s == state);
 				break;
@@ -99,10 +100,7 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 	private boolean checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
 		boolean result = false;
 		// DTO의 값과 로그인 유저의 권한을 체크
-		// ..
-		// 
-		// dto.get
-		return result;
+		return dto.getUserIndex() == user.getUserIndex();
 	}
 
 }
@@ -112,6 +110,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMDY4ODY1NzAsLTE5MzgwNTE2OTZdfQ
-==
+eyJoaXN0b3J5IjpbMTM5ODA0NTk2MCwtMTkzODA1MTY5Nl19
 -->
