@@ -23,10 +23,6 @@ Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조�
 @Documented
 public @interface Authorised {
 	String value() default "";
-	// Default 로 타입을 Work 타입을 지정한다.(Lock 체크)
-	EnumWorkStateType workStateType() default EnumWorkStateType.work;
-
-	EnumWorkableState[] compareTo() default EnumWorkableState.WORKABLE;
 }
 ```
 #### Custom HandlerMethodArgumentResolver 정의
@@ -78,7 +74,6 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		} else {
 			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
 		}
-		return pathVariableMap.get(annValue);
 	}
 
 	private boolean checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
@@ -95,5 +90,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzQzMzQxMjcsLTE5MzgwNTE2OTZdfQ==
+eyJoaXN0b3J5IjpbMzY4ODg0MjA3LC0xOTM4MDUxNjk2XX0=
 -->
