@@ -13,7 +13,7 @@ Rest API에 전달되는 @PathVariable로 전달되는 key값을 이용하여 �
 때문에 '가' API 같은 경우에는 같은 서비스를 2번이나 호출된다.
 맘에 좀 안 든다.
 차라리 RestController에서 전달 받은 인자로 권한 체크를 하고 이를 비지니스 로직에 넣어주는 것으로 해보려고 한다.
-'가' API인 경우에 Type
+'가' API인 경우에 bDTO를 RestController의 인자로 변경하여 전달하는 것이다.
 
 요약하면 아래와 같다.
 
@@ -104,6 +104,5 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjA2MTM5NzcsLTE5MzgwNTE2OTZdfQ
-==
+eyJoaXN0b3J5IjpbMTY3MDUxMTQ5MiwtMTkzODA1MTY5Nl19
 -->
