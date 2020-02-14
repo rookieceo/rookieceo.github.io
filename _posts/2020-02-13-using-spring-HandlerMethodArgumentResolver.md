@@ -17,11 +17,122 @@ Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조�
 요약하면 아래와 같다.
 
 #### 어노테이션(@Authorised) 선언
-#### Custom HandlerMethodArgumentResolver 정의
-#### Cont
 ```java 
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface Authorised {
+	String value() default "";
+	// Default 로 타입을 Work 타입을 지정한다.(Lock 체크)
+	EnumWorkStateType workStateType() default EnumWorkStateType.work;
 
+	EnumWorkableState[] compareTo() default EnumWorkableState.WORKABLE;
+}
 ```
+#### Custom HandlerMethodArgumentResolver 정의
+```java 
+@Slf4j
+@Component
+public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver {
+
+	@Autowired
+	private DiagnosisTableService service;
+
+	@Override
+	public boolean supportsParameter(MethodParameter methodParameter) {
+		return methodParameter.hasParameterAnnotation(Authorised.class);
+	}
+
+	@Override
+	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
+		WebDataBinderFactory binderFactory) throws Exception {
+
+		Authorised authorised = parameter.getParameterAnnotation(Authorised.class);
+		String annValue = authorised.value();
+
+		Map<?, ?> pathVariableMap = (Map<?, ?>) webRequest.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE,
+			RequestAttributes.SCOPE_REQUEST);
+
+		log.debug("pathVariableMap.get(annValue) ====> {}", pathVariableMap.get(annValue));
+		log.debug("methodParameter.getParameterType() ====> {}", parameter.getParameterType());
+		log.debug("methodParameter.getParameterName()() ====> {}", parameter.getParameterName());
+
+		// Work 작업인경우의 권한 체크
+		if (EnumWorkStateType.work == authorised.workStateType()) {
+
+			Long workIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
+			// 1. Get diagnosisDTO at DB
+			DiagnosisDTO diagnosisDTO = this.service.getDiagnosisByWorkIndex(workIndex);
+
+			if (diagnosisDTO == null) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Diagnosis Not Found");
+			}
+
+			// 2. Get Login User Object
+			RoseUser roseUser = (RoseUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
+
+			// 4. Compare Authorised Work
+			boolean isAuthorized = false;
+			switch (roseUser.getUserRole()) {
+			case labSuperManager:
+			case labManager:
+				isAuthorized = true;
+				break;
+			default:
+				// 3. Current Diagnosis Workable State
+				EnumWorkableState state = this.checkIfIsCurrentlyAuthorisedWorkByWorkIndex(diagnosisDTO, roseUser);
+				EnumWorkableState[] workableStateTarget = authorised.compareTo();
+				isAuthorized = Arrays.stream(workableStateTarget).anyMatch(s -> s == state);
+				break;
+			}
+			if (isAuthorized) {
+				if (DiagnosisDTO.class.isAssignableFrom(parameter.getParameterType())) {
+					return diagnosisDTO;
+				} else if (Long.class.isAssignableFrom(parameter.getParameterType()) ||
+					long.class.isAssignableFrom(parameter.getParameterType())) {
+					return workIndex;
+				} else {
+					return pathVariableMap.get(annValue);
+				}
+			} else {
+				// throw new AccessDeniedException("Work Access Denied");
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Work Access Denied");
+			}
+		}
+		return pathVariableMap.get(annValue);
+	}
+
+	private EnumWorkableState checkIfIsCurrentlyAuthorisedWorkByWorkIndex(DiagnosisDTO dto, RoseUser user) throws Exception {
+		EnumWorkableState result;
+
+		log.info("dto.getWorkerUserIndex() : {}", dto.getWorkerUserIndex());
+		log.info("dto.getLockedUserIndex() : {}", dto.getLockedUserIndex());
+		log.info("user.getUserSystemIndex() : {}", user.getUserSystemIndex());
+
+		if (dto.getWorkerUserIndex().longValue() == -1) {
+			// 1) 작업이 미 할당된 상태 => 미 할당 UnAssignment
+			result = EnumWorkableState.UN_ASSIGNMENT;
+		} else if (dto.getLockedUserIndex().longValue() == -1 && dto.getWorkerUserIndex().longValue() == user.getUserSystemIndex()) {
+			// 2) 작업자 할당 && 로그인 유저가 같고 작업시작이 되지 않았다면 => 작업 시작 전 상태 Assignment
+			result = EnumWorkableState.ASSIGNMENT;
+		} else if (dto.getLockedUserIndex().longValue() == dto.getWorkerUserIndex().longValue()
+			&& dto.getWorkerUserIndex().longValue() == user.getUserSystemIndex()) {
+			// 3) 작업자 할당 && 로그인 유저 && 작업이 진행 되었다면 => 작업 가능 상태 ==> Working
+			result = EnumWorkableState.WORKABLE;
+		} else {
+			// 4) 해당 없으므로 아무액션 없음 : Lock
+			result = EnumWorkableState.LOCKED;
+		}
+		log.info("checkIfIsCurrentlyAuthorisedWorkByWorkIndex result : {}", result);
+		return result;
+	}
+
+}
+```
+
+#### Controller에서 사용
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTMxMjEyMTEwXX0=
+eyJoaXN0b3J5IjpbODA0NDc5OTgzXX0=
 -->
