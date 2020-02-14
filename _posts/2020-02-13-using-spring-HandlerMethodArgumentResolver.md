@@ -13,13 +13,13 @@ Rest API에 전달되는 @PathVariable로 전달되는 key값을 이용하여 �
 때문에 '가' API 같은 경우에는 같은 서비스를 2번이나 호출된다.
 맘에 좀 안 든다.
 차라리 RestController에서 전달 받은 PathVariable 값을 기준으로 'A'서비스 호출 권한 체크를 하고 이를 비지니스 로직에 넣어주는 것으로 해보려고 한다.
-'가' API인 경우에 bDTO를 RestController의 인자를 타입을 변경하여 전달할 것이다.
+'가' API인 경우에 bDTO를 RestController의 인자 타입으로 변경하여 전달할 것이다.
 
 요약하면 아래와 같다.
 1. Custom Annotation(@Authorised) 선언
 2. Custom HandlerMethodArgumentResolver 정의(AuthorisedArgumentResolver)
 3. Spring WebMVC에 Custom HandlerMethodArgumentResolver추가
-4. 컨트롤러에서 사용
+4. RestController에서 사용
 
 #### Custom Annotation(@Authorised) 선언
 ```java 
@@ -109,6 +109,6 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTc3MTc3MjcsLTE5NDQ1NDA5OSwtMT
-kzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOT
+M4MDUxNjk2XX0=
 -->
