@@ -4,7 +4,7 @@ published: false
 ## RestController에서 HandlerMethodArgumentResolver 활용해 컨트롤러 파라미터 변경 해보기
 
 
-어느날, 잘 사용하던 Rest Controller의 권한 체크에 이슈가 생겼다.
+어느날, 잘 사용하던 Rest Controller 권한 체크에 이슈가 생겼다.
 Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스)를 통해 현재 접근 가능한 API인지 체크해야했다.
 여러 API에서 해당 로직이 작동해야했다.
 처음에 AOP를 활용하여 비즈니스 로직에 영향을 주지 않는 범위에서 로직을 넣고자 했다.
@@ -50,10 +50,9 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		Authorised authorised = parameter.getParameterAnnotation(Authorised.class);
 		String annValue = authorised.value();
 
+		// pathVariable 값을 가져온다.
 		Map<?, ?> pathVariableMap = (Map<?, ?>) webRequest.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE,
 			RequestAttributes.SCOPE_REQUEST);
-
-		// Work 작업인경우의 권한 체크
 
 		Long keyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
 		// 1. Get BDTO at DB by PathVariable keyIndex
@@ -71,14 +70,14 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 			if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
 				return bDTO;
 			} else if (Long.class.isAssignableFrom(parameter.getParameterType()) ||
-				long.class.isAssignableFrom(parameter.getParameterType())) {
+					long.class.isAssignableFrom(parameter.getParameterType())) {
 				return keyIndex;
-				} else {
-					return pathVariableMap.get(annValue);
-				}
 			} else {
-				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
+				return pathVariableMap.get(annValue);
 			}
+		} else {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
+		}
 		return pathVariableMap.get(annValue);
 	}
 
@@ -96,5 +95,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzMwNTA5MzQ2LC0xOTM4MDUxNjk2XX0=
+eyJoaXN0b3J5IjpbMzQzMzQxMjcsLTE5MzgwNTE2OTZdfQ==
 -->
