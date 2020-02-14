@@ -74,12 +74,13 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 				isAuthorized = true;
 				break;
 			default:
-				// 3. Current Diagnosis Workable State
+				// 3. Current BDTO Workable State
 				EnumWorkableState state = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
 				EnumWorkableState[] workableStateTarget = authorised.compareTo();
 				isAuthorized = Arrays.stream(workableStateTarget).anyMatch(s -> s == state);
 				break;
 			}
+			
 			if (isAuthorized) {
 				if (DiagnosisDTO.class.isAssignableFrom(parameter.getParameterType())) {
 					return diagnosisDTO;
@@ -90,14 +91,13 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 					return pathVariableMap.get(annValue);
 				}
 			} else {
-				// throw new AccessDeniedException("Work Access Denied");
-				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Work Access Denied");
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
 			}
 		}
 		return pathVariableMap.get(annValue);
 	}
 
-	private EnumWorkableState checkIfIsCurrentlyAuthorised(DiagnosisDTO dto, RoseUser user) throws Exception {
+	private EnumWorkableState checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
 		EnumWorkableState result;
 
 		log.info("dto.getWorkerUserIndex() : {}", dto.getWorkerUserIndex());
@@ -129,5 +129,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzI5ODE5MDE2XX0=
+eyJoaXN0b3J5IjpbLTE5MzgwNTE2OTZdfQ==
 -->
