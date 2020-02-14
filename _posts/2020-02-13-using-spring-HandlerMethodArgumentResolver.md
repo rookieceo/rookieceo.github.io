@@ -56,9 +56,9 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		// Work 작업인경우의 권한 체크
 		if (EnumWorkStateType.work == authorised.workStateType()) {
 
-			Long workIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
+			Long longTypeKeyIndex= Long.valueOf(pathVariableMap.get(annValue).toString());
 			// 1. Get diagnosisDTO at DB
-			DiagnosisDTO diagnosisDTO = this.service.getDiagnosisByWorkIndex(workIndex);
+			BDTO bDTO = this.service.getBDTOByLongTypeKeyIndex(longTypeKeyIndex);
 
 			if (diagnosisDTO == null) {
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Diagnosis Not Found");
@@ -130,5 +130,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU2MTcxMjE1OV19
+eyJoaXN0b3J5IjpbMTQ1ODc1MTgwN119
 -->
