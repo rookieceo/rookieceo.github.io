@@ -198,9 +198,11 @@ class AControllerTest {
 }
 ```
 
-전체소스는 [여기](https://github.com
+글로 쓰려니까 어렵다. ㅠㅜ
+
+전체 코드는 [여기](https://github.com/rookiceo)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYyNjA1NzEzMCwtMjA1MjcyNjAzMSw0MT
+eyJoaXN0b3J5IjpbMTMxMTgxMTY0MCwtMjA1MjcyNjAzMSw0MT
 I3MTU1NzcsMTE4NTMzMTE5NywtMTU1NzU0NzIzMSwxMDkyODA1
 NzM0LC02MjM3Njk3NTgsLTEwMTA2MTk5NzAsLTE4MDY1NTE5Mz
 IsLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOTM4MDUxNjk2XX0=
