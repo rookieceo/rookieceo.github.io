@@ -96,28 +96,12 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		return pathVariableMap.get(annValue);
 	}
 
-	private EnumWorkableState checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
-		EnumWorkableState result;
-
-		log.info("dto.getWorkerUserIndex() : {}", dto.getWorkerUserIndex());
-		log.info("dto.getLockedUserIndex() : {}", dto.getLockedUserIndex());
-		log.info("user.getUserSystemIndex() : {}", user.getUserSystemIndex());
-
-		if (dto.getWorkerUserIndex().longValue() == -1) {
-			// 1) 작업이 미 할당된 상태 => 미 할당 UnAssignment
-			result = EnumWorkableState.UN_ASSIGNMENT;
-		} else if (dto.getLockedUserIndex().longValue() == -1 && dto.getWorkerUserIndex().longValue() == user.getUserSystemIndex()) {
-			// 2) 작업자 할당 && 로그인 유저가 같고 작업시작이 되지 않았다면 => 작업 시작 전 상태 Assignment
-			result = EnumWorkableState.ASSIGNMENT;
-		} else if (dto.getLockedUserIndex().longValue() == dto.getWorkerUserIndex().longValue()
-			&& dto.getWorkerUserIndex().longValue() == user.getUserSystemIndex()) {
-			// 3) 작업자 할당 && 로그인 유저 && 작업이 진행 되었다면 => 작업 가능 상태 ==> Working
-			result = EnumWorkableState.WORKABLE;
-		} else {
-			// 4) 해당 없으므로 아무액션 없음 : Lock
-			result = EnumWorkableState.LOCKED;
-		}
-		log.info("checkIfIsCurrentlyAuthorisedWorkByWorkIndex result : {}", result);
+	private boolean checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
+		boolean result = false;
+		// DTO의 값과 로그인 유저의 권한을 체크
+		// ..
+		// 
+		// dto.get
 		return result;
 	}
 
@@ -128,5 +112,6 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQ4MzE2NjA0LC0xOTM4MDUxNjk2XX0=
+eyJoaXN0b3J5IjpbLTEyMDY4ODY1NzAsLTE5MzgwNTE2OTZdfQ
+==
 -->
