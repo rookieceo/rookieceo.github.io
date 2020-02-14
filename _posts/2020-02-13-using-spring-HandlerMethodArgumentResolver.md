@@ -16,8 +16,12 @@ Rest API에 전달되는 @PathVariable로 전달되는 key값을 이용하여 �
 '가' API인 경우에 bDTO를 RestController의 인자를 타입을 변경하여 전달할 것이다.
 
 요약하면 아래와 같다.
+1. Custom Annotation(@Authorised) 
+2. Custom HandlerMethodArgumentResolver 정의
+3. Spring WebMVC에 Custom HandlerMethodArgumentResolver추가
+4. 컨트롤러에서 사용
 
-#### 어노테이션(@Authorised) 선언
+#### Custom Annotation(@Authorised) 선언
 ```java 
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
@@ -105,5 +109,6 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDQ1NDA5OSwtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbMTgyNTU2ODg1MSwtMTk0NDU0MDk5LC0xOT
+M4MDUxNjk2XX0=
 -->
