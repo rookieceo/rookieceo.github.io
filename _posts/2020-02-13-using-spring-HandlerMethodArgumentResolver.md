@@ -53,10 +53,6 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		Map<?, ?> pathVariableMap = (Map<?, ?>) webRequest.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE,
 			RequestAttributes.SCOPE_REQUEST);
 
-		log.debug("pathVariableMap.get(annValue) ====> {}", pathVariableMap.get(annValue));
-		log.debug("methodParameter.getParameterType() ====> {}", parameter.getParameterType());
-		log.debug("methodParameter.getParameterName()() ====> {}", parameter.getParameterName());
-
 		// Work 작업인경우의 권한 체크
 		if (EnumWorkStateType.work == authorised.workStateType()) {
 
@@ -134,5 +130,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODA0NDc5OTgzXX0=
+eyJoaXN0b3J5IjpbMTY2OTIxMjkxN119
 -->
