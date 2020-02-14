@@ -94,7 +94,7 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 	@Autowired
 	private AuthorisedArgumentResolver authorisedArgumentResolver;
 
-	// 우리가 만든 ArgumentResolver를 추가한다.
+	// 앞서 만든 ArgumentResolver를 추가한다.
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		argumentResolvers.add(this.authorisedArgumentResolver);
@@ -108,8 +108,8 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE4NTMzMTE5NywtMTU1NzU0NzIzMSwxMD
-kyODA1NzM0LC02MjM3Njk3NTgsLTEwMTA2MTk5NzAsLTE4MDY1
-NTE5MzIsLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOTM4MDUxNj
-k2XX0=
+eyJoaXN0b3J5IjpbNDEyNzE1NTc3LDExODUzMzExOTcsLTE1NT
+c1NDcyMzEsMTA5MjgwNTczNCwtNjIzNzY5NzU4LC0xMDEwNjE5
+OTcwLC0xODA2NTUxOTMyLC00ODQxNzQ5MjksLTE5NDQ1NDA5OS
+wtMTkzODA1MTY5Nl19
 -->
