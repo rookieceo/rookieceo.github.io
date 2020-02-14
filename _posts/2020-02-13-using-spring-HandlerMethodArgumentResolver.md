@@ -57,14 +57,13 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		if (EnumWorkStateType.work == authorised.workStateType()) {
 
 			Long keyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
-			// 1. Get BDTO at DB by PathVariable
+			// 1. Get BDTO at DB by PathVariable keyIndex
 			BDTO bDTO = this.service.getBDTOByKeyIndex(keyIndex);
 
 			if (bDTO == null) {
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BDTO Not Found");
 			}
-
-			// 2. Get Login User Object
+			// 2. Get Login Spring Security User Object 
 			LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
 
 			// 4. Compare Authorised Work
@@ -129,5 +128,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzNDE1MzM3OCwtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbODQ4MzE2NjA0LC0xOTM4MDUxNjk2XX0=
 -->
