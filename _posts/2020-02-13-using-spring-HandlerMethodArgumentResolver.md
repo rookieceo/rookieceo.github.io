@@ -37,7 +37,7 @@ public @interface Authorised {
 public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver {
 
 	@Autowired
-	private AService aService;
+	private AService service;
 
 	@Override
 	public boolean supportsParameter(MethodParameter methodParameter) {
@@ -109,6 +109,6 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOT
-M4MDUxNjk2XX0=
+eyJoaXN0b3J5IjpbLTE4MDY1NTE5MzIsLTQ4NDE3NDkyOSwtMT
+k0NDU0MDk5LC0xOTM4MDUxNjk2XX0=
 -->
