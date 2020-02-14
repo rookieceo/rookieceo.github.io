@@ -8,7 +8,7 @@ published: false
 Rest API에 전달되는 @PathVariable로 전달되는 key값을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스)를 호출해 현재 접근 가능한 API인지 체크해야했다.
 여러 API에서 해당 로직이 작동해야했다.
 처음에 AOP를 활용하여 비즈니스 로직에 영향을 주지 않는 범위에서 로직을 넣고자 했다.
-특정 어노테이션(@Authorised)을 선언하고 이를 포인트 컷으로 지정해 체크하면 되겠다고 생각해서 코드를 넣다가 아쉬운 점을 발겼했다.
+특정 어노테이션(@Authorised)을 선언하고 이를 포인트 컷으로 지정해 체크하면 되겠다고 생각해서 코드를 넣다가 아쉬운 점을 발견했다.
 어떤 API(편의상 '가' API)의 경우 AOP 내에서 권한 체크에 사용했던  'A'서비스의 DTO를 JSON으로 출력한다.
 때문에 '가' API 같은 경우에는 같은 서비스를 2번이나 호출된다.
 맘에 좀 안 든다.
@@ -16,8 +16,8 @@ Rest API에 전달되는 @PathVariable로 전달되는 key값을 이용하여 �
 '가' API인 경우에 bDTO를 RestController의 인자를 타입을 변경하여 전달할 것이다.
 
 요약하면 아래와 같다.
-1. Custom Annotation(@Authorised) 
-2. Custom HandlerMethodArgumentResolver 정의
+1. Custom Annotation(@Authorised) 선언
+2. Custom HandlerMethodArgumentResolver 정의(AuthorisedArgumentResolver)
 3. Spring WebMVC에 Custom HandlerMethodArgumentResolver추가
 4. 컨트롤러에서 사용
 
@@ -109,6 +109,6 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgyNTU2ODg1MSwtMTk0NDU0MDk5LC0xOT
-M4MDUxNjk2XX0=
+eyJoaXN0b3J5IjpbLTE0MTc3MTc3MjcsLTE5NDQ1NDA5OSwtMT
+kzODA1MTY5Nl19
 -->
