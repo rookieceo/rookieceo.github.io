@@ -7,13 +7,13 @@ published: false
 어느날, 잘 사용하던 Rest Controller 권한 체크에 이슈가 생겼다.
 Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스)를 호출해 현재 접근 가능한 API인지 체크해야 하고 해당 로직이 여러 API에서 작동해야했다.
 처음에 AOP를 활용하여 비즈니스 로직에 영향을 주지 않는 범위에서 로직을 넣고자 했다.
-특정 어노테이션(@Authorised)을 선언하고 이를 포인트 컷으로 지정해 체크하면 되겠다고 생각해서 코드를 넣다가 아쉬운 점을 발견했다.
+커스텀 어노테이션(@Authorised)을 선언하고 이를 포인트 컷으로 지정해 체크하면 되겠다고 생각해서 코드를 넣다가 아쉬운 점을 발견했다.
 어떤 API(편의상 '가' API)의 경우 권한 체크에 사용했던  'A'서비스로 리턴되는 DTO(편의상 bDTO)를 JSON으로 출력한다.
 때문에 '가' API 같은 경우에는 'A' 서비스를 2번이나 호출하게 된다.
 맘에 좀 안 든다. 
 그래서 RestController에서 전달 받은 PathVariable 값을 기준으로 'A'서비스 호출 권한 체크를 하고 이를 비지니스 로직에 넣어주는 것으로 해보려고 한다.
 '가' API인 경우에 bDTO를 RestController의 인자 타입으로 변경하여 전달할 것이다.
-HandlerMethodArgumentResolver를 활용해야 한다.
+인자 타입을 변경하려면 HandlerMethodArgumentResolver를 활용해야 한다.
 
 요약하면 아래와 같다.
 1. Custom Annotation(@Authorised) 선언
@@ -103,10 +103,13 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 ```
 
 #### Controller에서 사용
+```java
 
+```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NTc1NDcyMzEsMTA5MjgwNTczNCwtNj
-IzNzY5NzU4LC0xMDEwNjE5OTcwLC0xODA2NTUxOTMyLC00ODQx
-NzQ5MjksLTE5NDQ1NDA5OSwtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbMTE4NTMzMTE5NywtMTU1NzU0NzIzMSwxMD
+kyODA1NzM0LC02MjM3Njk3NTgsLTEwMTA2MTk5NzAsLTE4MDY1
+NTE5MzIsLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOTM4MDUxNj
+k2XX0=
 -->
