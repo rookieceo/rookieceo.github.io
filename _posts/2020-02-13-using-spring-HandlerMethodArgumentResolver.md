@@ -6,7 +6,7 @@ published: false
 
 잘 사용하던 Controller의 권한 체크에 관련된 이슈가 생겼다.
 
-Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조회)를 통해 현재 접근 가능한 API인지 체크해야했다.
+Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조회, 편의사)를 통해 현재 접근 가능한 API인지 체크해야했다.
 
 여러 API에서 해당 로직이 작동해야했다.
 
@@ -20,3 +20,6 @@ Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조�
 
 맘에 좀 안들어 차라리 RestController에서 전달 받은 인자에 권한 체크 값을 
 
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTYxNjE5NTkyNl19
+-->
