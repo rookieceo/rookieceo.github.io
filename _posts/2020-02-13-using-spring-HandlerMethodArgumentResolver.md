@@ -69,14 +69,13 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 			// 4. Compare Authorised Work
 			boolean isAuthorized = false;
-			switch (roseUser.getUserRole()) {
-			case labSuperManager:
-			case labManager:
+			switch (loginUser.getUserRole()) {
+			case Manager:
 				isAuthorized = true;
 				break;
 			default:
 				// 3. Current Diagnosis Workable State
-				EnumWorkableState state = this.checkIfIsCurrentlyAuthorisedWorkByWorkIndex(diagnosisDTO, roseUser);
+				EnumWorkableState state = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
 				EnumWorkableState[] workableStateTarget = authorised.compareTo();
 				isAuthorized = Arrays.stream(workableStateTarget).anyMatch(s -> s == state);
 				break;
@@ -130,5 +129,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDYxODg0NTQ5XX0=
+eyJoaXN0b3J5IjpbMTUwMDg2NzQ4NV19
 -->
