@@ -6,20 +6,20 @@ published: false
 
 잘 사용하던 Controller의 권한 체크에 관련된 이슈가 생겼다.
 
-Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조회, 편의사)를 통해 현재 접근 가능한 API인지 체크해야했다.
+Rest API에 전달되는 @PathVariable을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스라고 하자)를 통해 현재 접근 가능한 API인지 체크해야했다.
 
 여러 API에서 해당 로직이 작동해야했다.
 
 처음에 AOP를 활용하여 비즈니스 로직에 영향을 주지 않는 범위에서 로직을 넣고자 했다.
 
-특정 어노테이션을 선언하고 이를 포인트 컷으로 지정해 체크하면 되겠다고 생각해서 코드를 넣다가 아쉬운 점을 발겼했다.
+특정 어노테이션(@Authorised)을 선언하고 이를 포인트 컷으로 지정해 체크하면 되겠다고 생각해서 코드를 넣다가 아쉬운 점을 발겼했다.
 
-어떤 API(편의상 '가' API라고 하자 ^^)의 경우 AOP 내에서 권한 체크에 사용했던 서비스의 DTO를 JSON으로 출력해야 했다.
+어떤 API(편의상 '가' API라고 하자 ^^)의 경우 AOP 내에서 권한 체크에 사용했던  'A'서비스의 DTO를 JSON으로 출력해야 했다.
 
 때문에 '가' API 같은 경우에는 같은 서비스를 2번이나 호출해야한다.
 
 맘에 좀 안들어 차라리 RestController에서 전달 받은 인자에 권한 체크 값을 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYxNjE5NTkyNl19
+eyJoaXN0b3J5IjpbMTQ4MjAxNDQ1OF19
 -->
