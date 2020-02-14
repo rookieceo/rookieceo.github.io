@@ -15,12 +15,29 @@ Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비�
 인자 타입을 변경하려면 HandlerMethodArgumentResolver를 활용해야 한다.
 
 요약하면 아래와 같다.
+
 1. spring-security 설정
 2. Custom Annotation(@Authorised) 선언
 3. Custom ArgumentResolver 정의(AuthorisedArgumentResolver.java)
 4. 설정파일에 Custom ArgumentResolver추가(CustomMVCConfig.java)
 5. RestController에서 사용(AController.java)
 6. 테스트 결과 확인(AControllerTest.java)
+
+하나씩 
+
+#### spring-security 설정
+```java
+@Configuration
+@EnableWebSecurity
+public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+			.antMatchers("/api/type1/**").permitAll() // type1 접근허용
+			.anyRequest().authenticated();
+	}
+}
+```
 
 #### Custom Annotation(@Authorised) 선언
 ```java 
@@ -142,9 +159,9 @@ public class AController {
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgyMDc5Mjg0NiwtMjA1MjcyNjAzMSw0MT
-I3MTU1NzcsMTE4NTMzMTE5NywtMTU1NzU0NzIzMSwxMDkyODA1
-NzM0LC02MjM3Njk3NTgsLTEwMTA2MTk5NzAsLTE4MDY1NTE5Mz
-IsLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOTM4MDUxNjk2XX0=
+eyJoaXN0b3J5IjpbLTExMzI0OTI5MzQsLTIwNTI3MjYwMzEsND
+EyNzE1NTc3LDExODUzMzExOTcsLTE1NTc1NDcyMzEsMTA5Mjgw
+NTczNCwtNjIzNzY5NzU4LC0xMDEwNjE5OTcwLC0xODA2NTUxOT
+MyLC00ODQxNzQ5MjksLTE5NDQ1NDA5OSwtMTkzODA1MTY5Nl19
 
 -->
