@@ -32,7 +32,6 @@ public @interface Authorised {
 ```
 #### Custom HandlerMethodArgumentResolver 정의
 ```java 
-@Slf4j
 @Component
 public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -51,9 +50,8 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		Authorised authorised = parameter.getParameterAnnotation(Authorised.class);
 		String annValue = authorised.value();
 
-		// pathVariable 값을 가져온다.
-		Map<?, ?> pathVariableMap = (Map<?, ?>) webRequest.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE,
-			RequestAttributes.SCOPE_REQUEST);
+		// PathVariable 값을 가져온다.
+		Map<?, ?> pathVariableMap = (Map<?, ?>) webRequest.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, RequestAttributes.SCOPE_REQUEST);
 
 		Long keyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
 		// 1. Get BDTO at DB by PathVariable keyIndex
@@ -61,17 +59,17 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		if (bDTO == null) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BDTO Not Found");
 		}
-		// 2. Get Login Spring Security User Object 
+		// 2. Get Login Spring Security User Object
 		LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
 		// 3. Compare bDTO, loginUser
 		boolean isAuthorized = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
 
 		if (isAuthorized) {
-		
+
 			if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
 				return bDTO;
 			} else if (Long.class.isAssignableFrom(parameter.getParameterType()) ||
-					long.class.isAssignableFrom(parameter.getParameterType())) {
+				long.class.isAssignableFrom(parameter.getParameterType())) {
 				return keyIndex;
 			} else {
 				return pathVariableMap.get(annValue);
@@ -84,11 +82,12 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 	private boolean checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
 		boolean result = false;
 		// DTO의 값과 로그인 유저의 권한을 체크
-		// 예 : result = dto.getUserIndex() == user.getUserIndex();
-		return result
+		// 예 :
+		result = dto.getUserIndex() == user.getUserIndex();
+		return result;
 	}
-
 }
+
 ```
 #### CustomMVCConfig(ArgumentResolver 추가)
 ```java 
@@ -109,7 +108,7 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYyMzc2OTc1OCwtMTAxMDYxOTk3MCwtMT
-gwNjU1MTkzMiwtNDg0MTc0OTI5LC0xOTQ0NTQwOTksLTE5Mzgw
-NTE2OTZdfQ==
+eyJoaXN0b3J5IjpbMTA5MjgwNTczNCwtNjIzNzY5NzU4LC0xMD
+EwNjE5OTcwLC0xODA2NTUxOTMyLC00ODQxNzQ5MjksLTE5NDQ1
+NDA5OSwtMTkzODA1MTY5Nl19
 -->
