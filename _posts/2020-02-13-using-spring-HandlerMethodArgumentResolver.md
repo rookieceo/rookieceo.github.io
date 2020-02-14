@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 ## RestController에서 HandlerMethodArgumentResolver 활용해 컨트롤러 파라미터 변경 해보기
 
@@ -200,11 +200,12 @@ class AControllerTest {
 
 글로 쓰려니까 어렵다. ㅠㅜ
 
-전체 코드는 [여기](https://github.com/rookiceo)
+전체 코드는 여기에 있다.
+-  [https://github.com/rookieceo/CustomArgumentResolverExample](https://github.com/rookieceo/CustomArgumentResolverExample)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxMTgxMTY0MCwtMjA1MjcyNjAzMSw0MT
-I3MTU1NzcsMTE4NTMzMTE5NywtMTU1NzU0NzIzMSwxMDkyODA1
-NzM0LC02MjM3Njk3NTgsLTEwMTA2MTk5NzAsLTE4MDY1NTE5Mz
-IsLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOTM4MDUxNjk2XX0=
-
+eyJoaXN0b3J5IjpbMTgwMjcxNzEyOSwxMzExODExNjQwLC0yMD
+UyNzI2MDMxLDQxMjcxNTU3NywxMTg1MzMxMTk3LC0xNTU3NTQ3
+MjMxLDEwOTI4MDU3MzQsLTYyMzc2OTc1OCwtMTAxMDYxOTk3MC
+wtMTgwNjU1MTkzMiwtNDg0MTc0OTI5LC0xOTQ0NTQwOTksLTE5
+MzgwNTE2OTZdfQ==
 -->
