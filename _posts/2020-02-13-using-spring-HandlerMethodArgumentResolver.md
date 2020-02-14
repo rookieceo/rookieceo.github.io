@@ -16,11 +16,12 @@ Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비�
 인자 타입을 변경하려면 HandlerMethodArgumentResolver를 활용해야 한다.
 
 요약하면 아래와 같다.
-1. Custom Annotation(@Authorised) 선언
-2. Custom HandlerMethodArgumentResolver 정의(AuthorisedArgumentResolver)
-3. Spring WebMVC에 Custom HandlerMethodArgumentResolver추가
-4. RestController에서 사용
-5. 테스트하기
+1. spring-security 설정
+2. Custom Annotation(@Authorised) 선언
+3. Custom HandlerMethodArgumentResolver 정의(AuthorisedArgumentResolver)
+4. Spring WebMVC에 Custom HandlerMethodArgumentResolver추가
+5. RestController에서 사용
+6. 테스트하기
 
 #### Custom Annotation(@Authorised) 선언
 ```java 
@@ -33,6 +34,7 @@ public @interface Authorised {
 ```
 #### Custom HandlerMethodArgumentResolver 정의
 ```java 
+@Slf4j
 @Component
 public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -56,19 +58,19 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 		Long keyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
 		// 1. Get BDTO at DB by PathVariable keyIndex
-		BDTO bDTO = this.service.getBDTOByKeyIndex(keyIndex);
-		if (bDTO == null) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BDTO Not Found");
+		ADTO dto = this.service.getBDTOByKeyIndex(keyIndex);
+		if (dto == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "ADTO Not Found");
 		}
 		// 2. Get Login Spring Security User Object
-		LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
+		User loginUser = (User) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
 		// 3. Compare bDTO, loginUser
-		boolean isAuthorized = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
+		boolean isAuthorized = this.checkIfIsCurrentlyAuthorised(dto, loginUser);
 
 		if (isAuthorized) {
 
-			if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
-				return bDTO;
+			if (ADTO.class.isAssignableFrom(parameter.getParameterType())) {
+				return dto;
 			} else if (Long.class.isAssignableFrom(parameter.getParameterType()) ||
 				long.class.isAssignableFrom(parameter.getParameterType())) {
 				return keyIndex;
@@ -80,10 +82,15 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		}
 	}
 
-	private boolean checkIfIsCurrentlyAuthorised(BDTO dto, LoginUser user) throws Exception {
-		// DTO의 값과 로그인 유저의 권한을 체크
-		return dto.getUserIndex() == user.getUserIndex();
+	private boolean checkIfIsCurrentlyAuthorised(ADTO dto, User user) throws Exception {
+		log.debug("dto.getKeyIndex() : {}", dto.getKeyIndex());
+		log.debug("dto.getOwner() : {}", dto.getOwner());
+		log.debug("loginUser.getUsername() : {}", user.getUsername());
+
+		// DTO의 Owner값과 로그인 유저의 ID로 권한을 체크, 편의상 getUsername으로 비교
+		return dto.getOwner().equals(user.getUsername());
 	}
+
 }
 
 ```
@@ -104,12 +111,38 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 #### Controller에서 사용
 ```java
+@RestController
+@RequestMapping("/api")
+public class AController {
 
+	// 일반 PathVariable 활용 로직
+	@GetMapping(value = "/type1/{keyIndex}")
+	public BDTO type1API(@PathVariable("keyIndex") Long keyIndex) {
+		BDTO dto = new BDTO();
+		dto.setKeyIndex(keyIndex);
+		return dto;
+	}
+
+	// AuthorisedArgumentResolver를 활용하여 비교 로직 -1
+	@GetMapping(value = "/type2/{keyIndex}")
+	public BDTO type2API(@Authorised("keyIndex") Long keyIndex) {
+		BDTO dto = new BDTO();
+		dto.setKeyIndex(keyIndex);
+		return dto;
+	}
+
+	// AuthorisedArgumentResolver를 활용하여 비교 로직 -2
+	@GetMapping(value = "/type3/{keyIndex}")
+	public ADTO type3API(@Authorised("keyIndex") ADTO dto) {
+		return dto;
+	}
+
+}
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDEyNzE1NTc3LDExODUzMzExOTcsLTE1NT
-c1NDcyMzEsMTA5MjgwNTczNCwtNjIzNzY5NzU4LC0xMDEwNjE5
-OTcwLC0xODA2NTUxOTMyLC00ODQxNzQ5MjksLTE5NDQ1NDA5OS
-wtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbLTIwNTI3MjYwMzEsNDEyNzE1NTc3LDExOD
+UzMzExOTcsLTE1NTc1NDcyMzEsMTA5MjgwNTczNCwtNjIzNzY5
+NzU4LC0xMDEwNjE5OTcwLC0xODA2NTUxOTMyLC00ODQxNzQ5Mj
+ksLTE5NDQ1NDA5OSwtMTkzODA1MTY5Nl19
 -->
