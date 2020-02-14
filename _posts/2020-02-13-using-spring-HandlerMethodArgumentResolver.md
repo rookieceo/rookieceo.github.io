@@ -56,16 +56,16 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		// Work 작업인경우의 권한 체크
 		if (EnumWorkStateType.work == authorised.workStateType()) {
 
-			Long longTypeKeyIndex= Long.valueOf(pathVariableMap.get(annValue).toString());
-			// 1. Get diagnosisDTO at DB
-			BDTO bDTO = this.service.getBDTOByLongTypeKeyIndex(longTypeKeyIndex);
+			Long KeyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
+			// 1. Get BDTO at DB by PathVariable
+			BDTO bDTO = this.service.getBDTOByKeyIndex(KeyIndex);
 
-			if (diagnosisDTO == null) {
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Diagnosis Not Found");
+			if (bDTO == null) {
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BDTO Not Found");
 			}
 
 			// 2. Get Login User Object
-			RoseUser roseUser = (RoseUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
+			LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
 
 			// 4. Compare Authorised Work
 			boolean isAuthorized = false;
@@ -130,5 +130,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ1ODc1MTgwN119
+eyJoaXN0b3J5IjpbNDYxODg0NTQ5XX0=
 -->
