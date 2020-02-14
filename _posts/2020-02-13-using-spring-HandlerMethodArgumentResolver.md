@@ -17,11 +17,11 @@ Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비�
 요약하면 아래와 같다.
 
 1. Custom Annotation(@Authorised) 선언
-2. Custom ArgumentResolver 정의(AuthorisedArgumentResolver.java)
-3. 설정파일에 Custom ArgumentResolver추가(CustomMVCConfig.java)
-4. RestController에서 사용(AController.java)
-5. 테스트하기 - Spring-Security 설정 (CustomWebSecurityConfig)
-6. 테스트하기 - AControllerTest.java
+2. Custom ArgumentResolver 정의(AuthorisedArgumentResolver)
+3. 설정파일에 Custom ArgumentResolver추가(CustomMVCConfig)
+4. RestController에서 사용(AController)
+5. 테스트준비 - Spring-Security 설정 (CustomWebSecurityConfig)
+6. 테스트준비 - ControllerTest 코드(AControllerTest)
 
 코드를 보자
 
@@ -144,7 +144,7 @@ public class AController {
 
 ```
 
-#### 테스트하기 - Spring-Security 설정 (CustomWebSecurityConfig)
+#### 테스트준비 - Spring-Security 설정 (CustomWebSecurityConfig)
 ```java
 @Configuration
 @EnableWebSecurity
@@ -157,10 +157,13 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 }
 ```
+
+#### 테스트준비 - ControllerTest 코드(AControllerTest)
+```java 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNDg5MTM4MDYsLTIwNTI3MjYwMzEsND
-EyNzE1NTc3LDExODUzMzExOTcsLTE1NTc1NDcyMzEsMTA5Mjgw
-NTczNCwtNjIzNzY5NzU4LC0xMDEwNjE5OTcwLC0xODA2NTUxOT
-MyLC00ODQxNzQ5MjksLTE5NDQ1NDA5OSwtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbMTk2MDc3NTczOCwtMjA1MjcyNjAzMSw0MT
+I3MTU1NzcsMTE4NTMzMTE5NywtMTU1NzU0NzIzMSwxMDkyODA1
+NzM0LC02MjM3Njk3NTgsLTEwMTA2MTk5NzAsLTE4MDY1NTE5Mz
+IsLTQ4NDE3NDkyOSwtMTk0NDU0MDk5LC0xOTM4MDUxNjk2XX0=
 
 -->
