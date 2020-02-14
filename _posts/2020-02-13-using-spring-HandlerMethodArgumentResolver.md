@@ -54,35 +54,31 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 			RequestAttributes.SCOPE_REQUEST);
 
 		// Work 작업인경우의 권한 체크
-		if (EnumWorkStateType.work == authorised.workStateType()) {
 
-			Long keyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
-			// 1. Get BDTO at DB by PathVariable keyIndex
-			BDTO bDTO = this.service.getBDTOByKeyIndex(keyIndex);
-
-			if (bDTO == null) {
-				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BDTO Not Found");
-			}
-			// 2. Get Login Spring Security User Object 
-			LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
-
-			// 4. Compare Authorised Work
-			// 3. Current BDTO Workable State
-			boolean isAuthorized = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
+		Long keyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
+		// 1. Get BDTO at DB by PathVariable keyIndex
+		BDTO bDTO = this.service.getBDTOByKeyIndex(keyIndex);
+		if (bDTO == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BDTO Not Found");
+		}
+		// 2. Get Login Spring Security User Object 
+		LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
+		// 4. Compare Authorised Work
+		// 3. Current BDTO Workable State
+		boolean isAuthorized = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
 			
-			if (isAuthorized) {
-				if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
-					return bDTO;
-				} else if (Long.class.isAssignableFrom(parameter.getParameterType()) ||
-					long.class.isAssignableFrom(parameter.getParameterType())) {
-					return keyIndex;
+		if (isAuthorized) {
+			if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
+				return bDTO;
+			} else if (Long.class.isAssignableFrom(parameter.getParameterType()) ||
+				long.class.isAssignableFrom(parameter.getParameterType())) {
+				return keyIndex;
 				} else {
 					return pathVariableMap.get(annValue);
 				}
 			} else {
 				throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access Denied");
 			}
-		}
 		return pathVariableMap.get(annValue);
 	}
 
@@ -100,5 +96,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI5OTA2MTg1NSwtMTkzODA1MTY5Nl19
+eyJoaXN0b3J5IjpbMzMwNTA5MzQ2LC0xOTM4MDUxNjk2XX0=
 -->
