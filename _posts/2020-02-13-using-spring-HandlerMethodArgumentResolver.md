@@ -56,9 +56,9 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		// Work 작업인경우의 권한 체크
 		if (EnumWorkStateType.work == authorised.workStateType()) {
 
-			Long KeyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
+			Long keyIndex = Long.valueOf(pathVariableMap.get(annValue).toString());
 			// 1. Get BDTO at DB by PathVariable
-			BDTO bDTO = this.service.getBDTOByKeyIndex(KeyIndex);
+			BDTO bDTO = this.service.getBDTOByKeyIndex(keyIndex);
 
 			if (bDTO == null) {
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BDTO Not Found");
@@ -82,11 +82,11 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 			}
 			
 			if (isAuthorized) {
-				if (DiagnosisDTO.class.isAssignableFrom(parameter.getParameterType())) {
-					return diagnosisDTO;
+				if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
+					return bDTO;
 				} else if (Long.class.isAssignableFrom(parameter.getParameterType()) ||
 					long.class.isAssignableFrom(parameter.getParameterType())) {
-					return workIndex;
+					return keyIndex;
 				} else {
 					return pathVariableMap.get(annValue);
 				}
@@ -129,5 +129,5 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzgwNTE2OTZdfQ==
+eyJoaXN0b3J5IjpbMjAzNDE1MzM3OCwtMTkzODA1MTY5Nl19
 -->
