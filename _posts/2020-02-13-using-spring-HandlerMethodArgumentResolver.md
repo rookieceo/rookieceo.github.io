@@ -3,7 +3,6 @@ published: false
 ---
 ## RestController에서 HandlerMethodArgumentResolver 활용해 컨트롤러 파라미터 변경 해보기
 
-
 어느날, 잘 사용하던 Rest Controller 권한 체크에 이슈가 생겼다.
 Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스)를 호출해 현재 접근 가능한 API인지 체크해야 하고 해당 로직이 여러 API에서 작동해야했다.
 처음에 AOP를 활용하여 비즈니스 로직에 영향을 주지 않는 범위에서 로직을 넣고자 했다.
@@ -18,8 +17,8 @@ Rest API에 @PathVariable로 전달되는 key값을 이용하여 특정 서비�
 요약하면 아래와 같다.
 1. spring-security 설정
 2. Custom Annotation(@Authorised) 선언
-3. Custom HandlerMethodArgumentResolver 정의(AuthorisedArgumentResolver.java)
-4. Custom HandlerMethodArgumentResolver추가(CustomMVCConfig.java)
+3. Custom ArgumentResolver 정의(AuthorisedArgumentResolver.java)
+4. 설정파일에 Custom ArgumentResolver추가(CustomMVCConfig.java)
 5. RestController에서 사용(AController.java)
 6. 테스트 결과 확인(AControllerTest.java)
 
@@ -141,7 +140,7 @@ public class AController {
 ```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYwNTE2MDQzLC0yMDUyNzI2MDMxLDQxMj
+eyJoaXN0b3J5IjpbMTk0ODEzMjg4LC0yMDUyNzI2MDMxLDQxMj
 cxNTU3NywxMTg1MzMxMTk3LC0xNTU3NTQ3MjMxLDEwOTI4MDU3
 MzQsLTYyMzc2OTc1OCwtMTAxMDYxOTk3MCwtMTgwNjU1MTkzMi
 wtNDg0MTc0OTI5LC0xOTQ0NTQwOTksLTE5MzgwNTE2OTZdfQ==
