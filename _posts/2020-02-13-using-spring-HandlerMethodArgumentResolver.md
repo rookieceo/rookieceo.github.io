@@ -59,10 +59,11 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 		}
 		// 2. Get Login Spring Security User Object 
 		LoginUser loginUser = (LoginUser) ((Authentication) webRequest.getUserPrincipal()).getPrincipal();
-		// 3. Compare 권한비교 로직
+		// 3. Compare bDTO, loginUser
 		boolean isAuthorized = this.checkIfIsCurrentlyAuthorised(bDTO, loginUser);
 
 		if (isAuthorized) {
+		
 			if (BDTO.class.isAssignableFrom(parameter.getParameterType())) {
 				return bDTO;
 			} else if (Long.class.isAssignableFrom(parameter.getParameterType()) ||
@@ -104,5 +105,5 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjIxNjIxNDc3LC0xOTM4MDUxNjk2XX0=
+eyJoaXN0b3J5IjpbLTE5NDQ1NDA5OSwtMTkzODA1MTY5Nl19
 -->
