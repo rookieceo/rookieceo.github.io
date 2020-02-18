@@ -10,6 +10,7 @@ tags:
   - PathVariable
 toc_sticky: true
 toc: true
+toc_label: 요약
 ---
 ## RestController에서 HandlerMethodArgumentResolver 활용해 컨트롤러 파라미터 변경해보기
 
@@ -44,7 +45,7 @@ Rest API에 @PathVariable로 전달되는 uri값을 이용하여 특정 서비�
 
 코드를 보자
 
-#### Custom Annotation(@Authorised) 선언
+##### Custom Annotation(@Authorised) 선언
 ```java 
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
@@ -53,7 +54,7 @@ public @interface Authorised {
 	String value() default "";
 }
 ```
-#### Custom HandlerMethodArgumentResolver 정의
+##### Custom HandlerMethodArgumentResolver 정의
 ```java 
 @Slf4j
 @Component
@@ -115,7 +116,7 @@ public class AuthorisedArgumentResolver implements HandlerMethodArgumentResolver
 }
 
 ```
-#### CustomMVCConfig(ArgumentResolver 추가)
+##### CustomMVCConfig(ArgumentResolver 추가)
 ```java 
 @Configuration
 public class CustomMVCConfig implements WebMvcConfigurer {
@@ -130,7 +131,7 @@ public class CustomMVCConfig implements WebMvcConfigurer {
 }
 ```
 
-#### Controller에서 사용
+##### Controller에서 사용
 ```java
 @RestController
 @RequestMapping("/api")
@@ -162,7 +163,7 @@ public class AController {
 }
 ```
 
-#### 테스트준비 - 테스트 데이터 저장(스프링부트 메인 어플리케이션)
+##### 테스트준비 - 테스트 데이터 저장(스프링부트 메인 어플리케이션)
 ```java
 @SpringBootApplication
 public class CustomArgumentResolverExampleApplication implements CommandLineRunner {
@@ -186,7 +187,7 @@ public class CustomArgumentResolverExampleApplication implements CommandLineRunn
 }
 ```
 
-#### 테스트준비 - Spring-Security 설정 (CustomWebSecurityConfig)
+##### 테스트준비 - Spring-Security 설정 (CustomWebSecurityConfig)
 ```java
 @Configuration
 @EnableWebSecurity
@@ -200,7 +201,7 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-#### 테스트준비 - ControllerTest 코드(AControllerTest)
+##### 테스트준비 - ControllerTest 코드(AControllerTest)
 ```java
 @SpringBootTest
 class AControllerTest {
