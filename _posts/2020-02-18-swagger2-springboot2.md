@@ -66,7 +66,7 @@ public class SwaggerConfig {
 			.description("API 리스트")
 			.version("API V0.1")
 			.termsOfServiceUrl("Terms of service")
-            .contact(new Contact("장인기", "", "이메일주소"))
+            .contact(new Contact("사용자명", "", "이메일주소"))
 			.license("Apache 2.0")
             .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
 			.build();
