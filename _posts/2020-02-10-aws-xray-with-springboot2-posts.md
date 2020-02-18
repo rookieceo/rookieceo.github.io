@@ -1,7 +1,17 @@
 ---
 title: AWS X-Ray 적용하기(using Spring AOP)
-date: 2020-02-10 18:28:00 +0900
-categories: aws x-ray xray springboot
+date: '2020-02-10 18:28:00 +0900'
+categories: springboot aws
+published: true
+toc: true
+toc_sticky: true
+tags:
+  - springboot
+  - aws
+  - x-ray
+  - xray
+  - aws sdk for java v2
+  - elasticbeanstalk
 ---
 
 ### AWS X-Ray 적용하기(using Spring AOP)
@@ -292,6 +302,3 @@ logging.file.name=${logging.file.path}/${spring.application.name}.log
 logging.pattern.file=%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} %X{AWS-XRAY-TRACE-ID} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
 
 ```
-
-
-
