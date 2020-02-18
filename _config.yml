@@ -111,7 +111,7 @@ author:
   name             : "장인기"
   avatar           : "/assets/images/bio-photo.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "요즘(?) 개발자가 되고 싶은 청년" # "I am an **amazing** person."
-  location         : "Somewhere"
+  location         : "Seoul, South"
   email            : 
   links:
     - label: "Email"
@@ -160,7 +160,7 @@ footer:
 include:
   - .htaccess
   - _pages
-  - assets/js/custom-js-adsense.js
+  # - /assets/js/custom-js-adsense.js
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -193,6 +193,8 @@ keep_files:
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
+footer_scripts:
+  - /assets/js/custom-js-adsense.js
 
 # Conversion
 markdown: kramdown

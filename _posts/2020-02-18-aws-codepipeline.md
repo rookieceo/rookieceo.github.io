@@ -2,7 +2,7 @@
 published: true
 title: AWS Codepipeline을 사용하여 CI/CD 환경 구성하기(beanstalk)
 date: '2020-02-18 17:56:00 +0900'
-categories: build CI/CD
+categories: aws
 last_modified_at: '2020-02-18 17:56:00 +0900'
 tags:
   - maven

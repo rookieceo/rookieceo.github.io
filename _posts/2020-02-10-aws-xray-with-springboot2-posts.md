@@ -1,7 +1,7 @@
 ---
 title: AWS X-Ray 적용하기(using Spring AOP)
 date: '2020-02-10 18:28:00 +0900'
-categories: springboot aws
+categories: aws
 published: true
 toc: true
 toc_sticky: true
@@ -10,8 +10,9 @@ tags:
   - aws
   - x-ray
   - xray
-  - aws sdk for java v2
+  - AWSSDKForJavaV2
   - elasticbeanstalk
+  - beanstalk
 ---
 
 ### AWS X-Ray 적용하기(using Spring AOP)
