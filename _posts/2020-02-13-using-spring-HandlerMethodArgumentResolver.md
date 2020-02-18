@@ -12,7 +12,7 @@ toc_sticky: true
 toc: true
 toc_label: 요약
 ---
-어느날, 잘 사용하던 Rest Controller에 신규 권한 체크가 필요했다.
+잘 사용하던 Rest Controller에 신규 권한 체크가 필요했다.
 
 Rest API에 @PathVariable로 전달되는 uri값을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스)를 호출해 현재 접근 가능한 API인지 체크해야 하고 해당 로직이 여러 API에서 작동해야했다.
 
@@ -31,7 +31,7 @@ Rest API에 @PathVariable로 전달되는 uri값을 이용하여 특정 서비�
 
 인자 타입을 변경하려면 HandlerMethodArgumentResolver를 활용해야 한다.
 
-요약하면 아래와 같다.
+글로 쓰고 보니 어려운데 요약하면 아래와 같다.
 
 1. Custom Annotation(@Authorised) 선언
 2. Custom ArgumentResolver 정의(AuthorisedArgumentResolver)
@@ -262,8 +262,7 @@ class AControllerTest {
 }
 ```
 
-글로 쓰려니까 어렵다. ㅠㅜ
-
+끝.
 
 전체 코드는 여기에 있다.
-- [https://github.com/rookieceo/CustomArgumentResolverExample](https://github.com/rookieceo/CustomArgumentResolverExample)
+[https://github.com/rookieceo/CustomArgumentResolverExample](https://github.com/rookieceo/CustomArgumentResolverExample)
