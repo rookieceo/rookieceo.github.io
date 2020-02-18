@@ -12,8 +12,6 @@ toc_sticky: true
 toc: true
 toc_label: 요약
 ---
-## RestController에서 HandlerMethodArgumentResolver 활용해 컨트롤러 파라미터 변경해보기
-
 어느날, 잘 사용하던 Rest Controller에 신규 권한 체크가 필요했다.
 
 Rest API에 @PathVariable로 전달되는 uri값을 이용하여 특정 서비스(DB 조회, 편의상 'A'서비스)를 호출해 현재 접근 가능한 API인지 체크해야 하고 해당 로직이 여러 API에서 작동해야했다.
