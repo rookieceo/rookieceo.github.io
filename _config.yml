@@ -111,7 +111,7 @@ author:
   name             : "장인기"
   avatar           : "/assets/images/bio-photo.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "요즘(?) 개발자가 되고 싶은 청년" # "I am an **amazing** person."
-  location         : "Seoul, South"
+  location         : "Seoul, South Korea"
   email            : 
   links:
     - label: "Email"
