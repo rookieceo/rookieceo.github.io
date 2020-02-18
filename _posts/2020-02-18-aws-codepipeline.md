@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 ---
 ## AWS Codepipeline을 사용하여 CI/CD 환경 구성하기(beanstalk)
 
