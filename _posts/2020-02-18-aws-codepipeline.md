@@ -20,14 +20,13 @@ toc: true
 
 AWS CodePipeline을 써보자
 
-회사에서 AWS Codecommit을 통해 코드관리를 하고 있다.
+회사에서 AWS Codecommit을 통해 코드관리를 하고 있다.  
+처음 환경을 구성하게 되었을 때, 별다른 코드관리 체계가 없어 어디에 구성을 할까 고민했다.  
+운영계가 AWS(Beanstalk)를 사용할 예정이니 같은 AWS에서 하면 관리하기 편하지 않을까 생각했다.  
+Private Repository이구 5유저까지는 무료이므로 비용이 발생하는 건 없다.  
 
-github을 고려할 수도 있었지만 운영계가 AWS를 사용할 예정이니 같은 AWS에서 하면 좋지 않을까 생각했다.
-Private Repository이구 5유저까지는 무료이므로 비용이 발생하는 건 없다.
-
-AWS Beanstalk는 패키징된 결과물을 직접 업로드 형태로 배포해도 되지만 
-조금 더 나이스한 방법으로 하고 싶어서 AWS Codepipeline으로 CI/CD를 구성해봤다. 
-(나이스하게 구성한건지는 모르겠다 ㅠㅜ)
+AWS Beanstalk는 패키징된 결과물을 직접 업로드 형태로 배포해도 되지만 조금 더 나이스한 방법으로 하고 싶어서 AWS Codepipeline으로 CI/CD를 구성해봤다.  
+(나이스하게 구성한건지는 모르겠다 ㅠㅜ)  
 
 참고사항이다.
 
