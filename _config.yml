@@ -160,6 +160,7 @@ footer:
 include:
   - .htaccess
   - _pages
+  - assets/js/custom-js-adsense.js
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
