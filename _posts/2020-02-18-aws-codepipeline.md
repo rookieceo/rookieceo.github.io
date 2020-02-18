@@ -24,6 +24,8 @@ AWS CodePipeline을 써보자
 처음 환경을 구성하게 되었을 때, 별다른 코드관리 체계가 없어 어디에 구성을 할까 고민했다.  
 운영계가 AWS(Beanstalk)를 사용할 예정이니 같은 AWS에서 하면 관리하기 편하지 않을까 생각했다.  
 Private Repository이구 5유저까지는 무료이므로 비용이 발생하는 건 없다.  
+다만 CodeBuild의 경우 현재 기준으로 빌드타임 월별 100분 이상시에는 유료로 비용이 발생할 수 있다.
+자세한 사항은 AWS 요금을 참고 바란다.
 
 AWS Beanstalk는 패키징된 결과물을 직접 업로드 형태로 배포해도 되지만 조금 더 나이스한 방법으로 하고 싶어서 AWS Codepipeline으로 CI/CD를 구성해봤다.  
 (나이스하게 구성한건지는 모르겠다 ㅠㅜ)  
@@ -32,7 +34,7 @@ AWS Beanstalk는 패키징된 결과물을 직접 업로드 형태로 배포해�
 
 > springboot, nuxt(vue)를 통해 개발을 하였다. 
 > 프론트와 백엔드 코드가 분리되어 있고, 프론트는 npm, 백엔드는 maven으로 빌드/패키징한다.
-  * 프론트 빌드 결과물은 nuxt generate를 통해 백엔드의 resources/public 영역으로 복사되어 패키징한다.
+ * 프론트 빌드 결과물은 nuxt generate를 통해 백엔드의 resources/public 영역으로 복사되어 패키징한다.
 > 운영계는 elastic beanstalk를 사용하고 있다.
 
 빌드/배포 이벤트는 'master' branch의 변경이 감지되면 실행되며 흐름은 아래와 같다.
