@@ -115,7 +115,7 @@ cache:
 
 ![/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-43.jpg](/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-43.jpg)
 
-#### 추가사항. zip 파일로 아카이빙하기(elastic beanstalk 직접 업로드 용)
+### ※추가 zip 파일로 아카이빙하기(elastic beanstalk 직접 업로드 용)
 
 > 참고자료 : https://maven.apache.org/plugins/maven-assembly-plugin/assembly.html
 
