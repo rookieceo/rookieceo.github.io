@@ -46,7 +46,7 @@ Rest API에 @PathVariable로 전달되는 uri값을 이용하여 특정 서비�
 2. Custom ArgumentResolver 정의(AuthorisedArgumentResolver)
 3. 설정파일에 Custom ArgumentResolver추가(CustomMVCConfig)
 4. Controller에서 사용(AController)
-5. 테스트준비 - 테스트 데이터 저장(스프링부트 메인 어플리케이션)
+5. 테스트준비 - 테스트 데이터 저장
 6. 테스트준비 - Spring-Security 설정 (CustomWebSecurityConfig)
 7. 테스트 - ControllerTest 코드(AControllerTest)
 
@@ -170,7 +170,7 @@ public class AController {
 }
 ```
 
-##### 5. 테스트준비 - 테스트 데이터 저장(스프링부트 메인 어플리케이션)
+##### 5. 테스트준비 - 테스트 데이터 저장
 ```java
 @SpringBootApplication
 public class CustomArgumentResolverExampleApplication implements CommandLineRunner {
