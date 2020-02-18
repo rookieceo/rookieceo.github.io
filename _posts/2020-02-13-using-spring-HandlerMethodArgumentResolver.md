@@ -258,12 +258,6 @@ class AControllerTest {
 
 글로 쓰려니까 어렵다. ㅠㅜ
 
+
 전체 코드는 여기에 있다.
 - [https://github.com/rookieceo/CustomArgumentResolverExample](https://github.com/rookieceo/CustomArgumentResolverExample)
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgwMjcxNzEyOSwxMzExODExNjQwLC0yMD
-UyNzI2MDMxLDQxMjcxNTU3NywxMTg1MzMxMTk3LC0xNTU3NTQ3
-MjMxLDEwOTI4MDU3MzQsLTYyMzc2OTc1OCwtMTAxMDYxOTk3MC
-wtMTgwNjU1MTkzMiwtNDg0MTc0OTI5LC0xOTQ0NTQwOTksLTE5
-MzgwNTE2OTZdfQ==
--->
