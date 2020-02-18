@@ -32,7 +32,7 @@ AWS Beanstalk는 패키징된 결과물을 직접 업로드 형태로 배포해�
 
 > springboot, nuxt(vue)를 통해 개발을 하였다. 
 > 프론트와 백엔드 코드가 분리되어 있고, 프론트는 npm, 백엔드는 maven으로 빌드/패키징한다.
- >> 프론트 빌드 결과물은 nuxt generate를 통해 백엔드의 resources/public 영역으로 복사되어 패키징한다.
+  * 프론트 빌드 결과물은 nuxt generate를 통해 백엔드의 resources/public 영역으로 복사되어 패키징한다.
 > 운영계는 elastic beanstalk를 사용하고 있다.
 
 빌드/배포 이벤트는 'master' branch의 변경이 감지되면 실행되며 흐름은 아래와 같다.
@@ -44,10 +44,16 @@ AWS Beanstalk는 패키징된 결과물을 직접 업로드 형태로 배포해�
 
 아래 설정 내용들을 참조한다. 처음에 조금 삽질을 했지만 한번 해보면 크게 어렵지 않다. 
 
-### 1. commit 설정 (Codecommit)
+### 1. commit (Codecommit)
+
+> code pipleline 생성 시 commit 단계 설정
+
 ![/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-14.jpg](/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-14.jpg)
 
 ### 2. build (Codebuild)
+
+> code pipleline 생성 시 build 단계 설정
+
  - 설정
 ![/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-29.jpg](/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-29.jpg)
  - 빌드명령 (buildspec.yml)
@@ -98,9 +104,13 @@ cache:
  - 해보면 빌드실행시간이 조금 긴데 S3와 연결하여 cache 설정을 해주는 것이 좋다.
 
 ### 3. Deploy(AWS Elastic beanstalk)
+
+> code pipleline 생성 시 deploy 단계 설정
+
 ![/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-35.jpg](/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-35.jpg)
 
 ### 4. 결과 확인
+
 ![/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-43.jpg](/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-43.jpg)
 
 #### 추가사항. zip 파일로 아카이빙하기(elastic beanstalk 직접 업로드 용)
