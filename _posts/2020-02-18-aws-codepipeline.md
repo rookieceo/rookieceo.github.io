@@ -17,9 +17,6 @@ tags:
 toc_sticky: true
 toc: true
 ---
-## AWS Codepipeline을 사용하여 CI/CD 환경 구성하기(beanstalk)
-
-
 회사에서 AWS Codecommit을 통해 코드관리를 하고 있다.
 github을 고려할 수도 있었지만 운영계가 AWS를 사용할 예정이니 같은 AWS에서 하면 좋지 않을까 생각했다.
 Private Repository이구 5유저까지는 무료이므로 비용이 발생하는 건 없다.
