@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: springboot에서 swagger2 적용하기
 date: '2020-02-18 14:55:00 +0900'
 categories: springboot
