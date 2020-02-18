@@ -32,15 +32,14 @@ Rest API에 @PathVariable로 전달되는 uri값을 이용하여 특정 서비�
 
 인자 타입을 변경하려면 HandlerMethodArgumentResolver를 활용해야 한다.
 
-글로 쓰고 보니 어려운데 요약하면 아래와 같다.
+글로 풀어 쓰니 조금 어려운데 요약하면 아래와 같다.
 
-1. Custom Annotation(@Authorised) 선언
-2. Custom ArgumentResolver 정의(AuthorisedArgumentResolver)
-3. 설정파일에 Custom ArgumentResolver추가(CustomMVCConfig)
-4. Controller에서 사용(AController)
-5. 테스트준비 - 테스트 데이터 저장(스프링부트 메인 어플리케이션)
-6. 테스트준비 - Spring-Security 설정 (CustomWebSecurityConfig)
-7. 테스트 - ControllerTest 코드(AControllerTest)
+1. 비즈니스 로직에 영향을 끼치지 않고 'A' 서비스의 호출결과 비교를 통해 특정 API의 권한을 체크한다.
+2. 어떤 API에는 'A' 서비스를 재사용하는 비즈니스 로직이 있다.
+3. HandlerMethodArgumentResolver를 이용해 2번 사용될 'A' 서비스를 한번만 사용한다.
+4. 테스트 해본다.
+
+[toc]
 
 코드를 보자
 
