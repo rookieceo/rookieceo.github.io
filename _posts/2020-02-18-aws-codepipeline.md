@@ -53,7 +53,9 @@ AWS Beanstalk는 패키징된 결과물을 직접 업로드 형태로 배포해�
 
  - 설정
 ![/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-29.jpg](/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-29.jpg)
+ 
  - 빌드명령 (buildspec.yml)
+ > 코드 빌드내 빌드 세부명령은 buildspec.yml 파일을 읽어 작동된다.
  > 프론트와 백엔드의 빌드 명령어를 넣어준다.
 
 ```yaml
