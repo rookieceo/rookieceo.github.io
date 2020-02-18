@@ -11,6 +11,7 @@ tags:
 toc_sticky: true
 toc: true
 toc_label: 요약
+last_modified_at: '2020-02-18 12:54:00 +0900'
 ---
 잘 사용하던 Rest Controller에 신규 권한 체크가 필요했다.
 
