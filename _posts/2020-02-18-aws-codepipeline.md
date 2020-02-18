@@ -44,13 +44,13 @@ AWS Beanstalk는 패키징된 결과물을 직접 업로드 형태로 배포해�
 
 아래 설정 내용들을 참조한다. 처음에 조금 삽질을 했지만 한번 해보면 크게 어렵지 않다. 
 
-### 1. commit (Codecommit)
+### 1. Commit (Codecommit)
 
 > code pipleline 생성 시 commit 단계 설정
 
 ![/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-14.jpg](/assets/images/2020-02-18-aws-codepipeline/2020-02-18 PM 04-06-14.jpg)
 
-### 2. build (Codebuild)
+### 2. Build (Codebuild)
 
 > code pipleline 생성 시 build 단계 설정
 
