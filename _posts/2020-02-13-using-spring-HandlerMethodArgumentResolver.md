@@ -2,8 +2,9 @@
 published: true
 date: '2020-02-13 18:30:00 +0900'
 categories: springboot ArgumentResolver HandlerMethodArgumentResolver PathVariable
+title: RestController에서 HandlerMethodArgumentResolver 활용해 컨트롤러 파라미터 변경해보기
 ---
-## RestController에서 HandlerMethodArgumentResolver 활용해 컨트롤러 파라미터 변경 해보기
+## RestController에서 HandlerMethodArgumentResolver 활용해 컨트롤러 파라미터 변경해보기
 
 어느날, 잘 사용하던 Rest Controller에 신규 권한 체크가 필요했다.
 
