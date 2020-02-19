@@ -9,28 +9,37 @@
 @import "minimal-mistakes"; // main partials
 
 /* type scale */
-// $type-size-1: 2.441em !default; // ~39.056px
-// $type-size-2: 1.953em !default; // ~31.248px
-// $type-size-3: 1.563em !default; // ~25.008px
-// $type-size-4: 1.25em !default; // ~20px
-// $type-size-5: 1em !default; // ~16px
-$type-size-1: 0.75em !default; // ~39.056px
-$type-size-2: 0.75em !default; // ~31.248px
-$type-size-3: 0.75em !default; // ~25.008px
-$type-size-4: 0.75em !default; // ~20px
-$type-size-5: 0.75em !default; // ~16px
+// $type-size-1: 0.75em !default; // ~39.056px
+// $type-size-2: 0.75em !default; // ~31.248px
+// $type-size-3: 0.75em !default; // ~25.008px
+// $type-size-4: 0.75em !default; // ~20px
+// $type-size-5: 0.75em !default; // ~16px
+
+$type-size-1: 2.441em !default; // ~39.056px
+$type-size-2: 1.953em !default; // ~31.248px
+$type-size-3: 1.563em !default; // ~25.008px
+$type-size-4: 1.25em !default; // ~20px
+$type-size-5: 1em !default; // ~16px
 $type-size-6: 0.75em !default; // ~12px
 $type-size-7: 0.6875em !default; // ~11px
 $type-size-8: 0.625em !default; // ~10px
 
-@include breakpoint($large) {
-  /* large 페이지 일때 폰트 사이즈 축소 20px->18px */
-  /* font-size: 20px; */
-  font-size: 18px;
-}
+html {
+  font-size: 16px; // change to whatever
 
-@include breakpoint($x-large) {
-  /* x-large 페이지 일때 폰트 사이즈 축소 20px->18px */
-  /* font-size: 20px; */
-  font-size: 18px;
+  @include breakpoint($medium) {
+    font-size: 16px; // change to whatever
+  }
+
+  @include breakpoint($large) {
+    /* large 페이지 일때 폰트 사이즈 축소 20px->18px */
+    /* font-size: 20px; */
+    font-size: 18px;
+  }
+
+  @include breakpoint($x-large) {
+    /* x-large 페이지 일때 폰트 사이즈 축소 20px->18px */
+    /* font-size: 20px; */
+    font-size: 18px;
+  }
 }
