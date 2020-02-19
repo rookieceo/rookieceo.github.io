@@ -23,7 +23,14 @@ $type-size-6: 0.75em !default; // ~12px
 $type-size-7: 0.6875em !default; // ~11px
 $type-size-8: 0.625em !default; // ~10px
 
-.page__lead {
-    font-family: $global-font-family;
-    font-size: $type-size-6;
-  }
+@include breakpoint($large) {
+  /* large 페이지 일때 폰트 사이즈 축소 20px->18px */
+  /* font-size: 20px; */
+  font-size: 18px;
+}
+
+@include breakpoint($x-large) {
+  /* x-large 페이지 일때 폰트 사이즈 축소 20px->18px */
+  /* font-size: 20px; */
+  font-size: 18px;
+}
