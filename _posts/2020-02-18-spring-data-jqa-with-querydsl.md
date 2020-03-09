@@ -14,10 +14,12 @@ toc: true
 ---
 
 springboot(2.2.X), spring-data-jpa, querydsl 사용...  
+
 간단한 기록...
 
 ### 1. 의존성 추가  
-> pom.xml - dependency 영역  
+> pom.xml (dependency 영역) 
+
 ```xml
 
 <!-- (..생략..) -->
@@ -36,7 +38,8 @@ springboot(2.2.X), spring-data-jpa, querydsl 사용...
 ```
 
 ### 2. 빌드 시 QType Entity Generate  
-> pom.xml - plugin 영역  
+> pom.xml (plugin 영역)  
+
 ```xml
 <!-- (..생략..) -->
 <plugin>
