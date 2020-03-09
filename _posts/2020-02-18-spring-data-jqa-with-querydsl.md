@@ -13,12 +13,13 @@ toc_sticky: true
 toc: true
 ---
 
-springboot(2.2.X), spring-data-jpa, querydsl 사용...
+springboot(2.2.X), spring-data-jpa, querydsl 사용...  
 간단한 기록...
 
-### 1. 의존성 추가
-> pom.xml - dependency 영역
+### 1. 의존성 추가  
+> pom.xml - dependency 영역  
 ```xml
+
 <!-- (..생략..) -->
 <dependency>
     <groupId>com.querydsl</groupId>
@@ -29,10 +30,13 @@ springboot(2.2.X), spring-data-jpa, querydsl 사용...
     <groupId>com.querydsl</groupId>
     <artifactId>querydsl-jpa</artifactId>
 </dependency>
+
 <!-- (..생략..) -->        
+
 ```
-### 2. 빌드 시 QType Entity Generate
-> pom.xml - plugin 영역
+
+### 2. 빌드 시 QType Entity Generate  
+> pom.xml - plugin 영역  
 ```xml
 <!-- (..생략..) -->
 <plugin>
