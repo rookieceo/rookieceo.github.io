@@ -87,4 +87,9 @@ class CustomARepositoryImpl extends QuerydslRepositorySupport implements CustomA
 ### 4. 사용
 > 기존 JPARepository DI 받은 후 사용하는 것과 동일
 
+
+### 5. 참고용 간단 예제
+> https://github.com/rookieceo/demo
+
+
 끝.
