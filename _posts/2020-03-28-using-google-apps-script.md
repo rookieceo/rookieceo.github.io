@@ -1,18 +1,16 @@
 ---
 published: true
-title: Google Apps Script를 활용하여 구글 폼 제출 시 외부 API 호출하기
+title: 'Google Apps Script를 활용하여 구글 폼 제출 시 외부 API 호출하기'
 date: '2020-03-28 13:00:00 +0900'
 categories: etc
 last_modified_at: '2020-03-28 13:00:00 +0900
 tags:
-  - google form
-  - google spreadsheet
-  - google apps script
+  - google-form
+  - google-spreadsheet
+  - google-apps-script
 toc_sticky: true
 toc: true
 ---
-
-# Google Apps Script를 활용하여 구글 폼 제출 시 외부 API 호출하기
 
 친구 부탁으로 구글 앱스 스크립트를 활용할 일이 생겼다.
 
