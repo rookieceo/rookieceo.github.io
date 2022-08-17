@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 title: '코딩테스트 뒤풀이'
 date: '2022-08-17 12:00:00 +0900'
 categories: etc
